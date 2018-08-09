@@ -1,4 +1,5 @@
 import numpy as np
+import cupy as cp
 import os
 from random import shuffle
 
@@ -17,12 +18,12 @@ class Data():
 		self._load_data()
 
 	def _load_data(self):
-		datas = np.load(os.path.join(DATA_PATH, self.files[self.file_counter]))
+		datas = cp.load(os.path.join(DATA_PATH, self.files[self.file_counter]))
 		self.X = []
 		for data in datas:
 			self.X.append(data)
 		shuffle(self.X)
-		self.X = np.asarray(self.X)
+		self.X = cp.asarray(self.X)
 		self.file_counter += 1
 
 
